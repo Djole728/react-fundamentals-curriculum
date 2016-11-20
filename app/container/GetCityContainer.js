@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 const GetCity = require('../components/GetCity');
+const getForcast = require('../utils/openWetherHelpers').getForcast;
 
 var GetCityContainer = React.createClass({
     getDefaultProps: function() {
@@ -12,14 +13,14 @@ var GetCityContainer = React.createClass({
     propTypes: {
         direction: PropTypes.string
     },
-    handleCityChange: function(event) {
-        this.setState({city: e.target.value})
+    handleCityChange: function(e) {
+        this.setState({city: e.target.value});
     },
     handleCitySubmit: function() {
-        console.log(this.state.city)
+      getForcast(this.state.city);
     },
     render: function() {
-        return (<GetCity direction={this.props.direction} onSubmitCity={this.handleCityChange} onUpdateCity={this.handleCitySubmit} city={this.state.city}/>);
+        return (<GetCity direction={this.props.direction} onUpdateCity={this.handleCityChange} onSubmitCity={this.handleCitySubmit} city={this.state.city}/>);
     }
 
 });
