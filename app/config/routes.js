@@ -6,13 +6,14 @@ var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 var Main = require('../container/MainContainer');
 var Home = require('../container/HomeContainer');
+var CityContainer = require('../container/CityContainer');
 
 var routes = (
     <Router history={hashHistory}>
       <Route path='/' component={Main}>
         <IndexRoute component={Home}/>
-        {/*<Route path="playerOne" header="Player One" component={PromptContainer}></Route>
-          <Route path="playerTwo/:playerOne" header="Player Two" component={PromptContainer}></Route>
+        <Route path="forecast/:city" component={CityContainer}></Route>
+        {/*<Route path="forecast/:city" header="Player Two" component={PromptContainer}></Route>
           <Route path='battle' component={ConfirmBattleContainer}></Route>
         <Route path='results' component={ResultsContainer}></Route> */}
       </Route>
