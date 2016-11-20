@@ -1,7 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 const GetCity = require('../components/GetCity');
-const getForcast = require('../utils/openWetherHelpers').getForcast;
 
 var GetCityContainer = React.createClass({
     contextTypes: {
@@ -19,7 +18,7 @@ var GetCityContainer = React.createClass({
     handleCityChange: function(e) {
         this.setState({city: e.target.value});
     },
-    handleCitySubmit: function() {
+    handleCitySubmit: function(e) {
       e.preventDefault()
         //getForcast(this.state.city);
         this.context.router.push('/forecast/' + this.state.city);
