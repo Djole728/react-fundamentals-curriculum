@@ -4,6 +4,9 @@ const City = require('../components/City');
 const getForcast = require('../utils/openWetherHelpers').getForcast;
 
 var CityContainer = React.createClass({
+  contextTypes: {
+      router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       isLoading: true,
@@ -25,9 +28,17 @@ var CityContainer = React.createClass({
         });
       }.bind(this));
   },
+  handleOnClickEvent: function(data){
+    this.context.router.push({
+          pathname: '/detail/' + this.props.routeParams.city,
+          state: {
+            data:  data
+          }
+        });
+  },
   render: function() {
     return (
-      <City city={this.props.routeParams.city} isLoading={this.state.isLoading} weather={this.state.weather} />
+      <City city={this.props.routeParams.city} isLoading={this.state.isLoading} weather={this.state.weather} onClickEvent={this.handleOnClickEvent} />
     );
   }
 
