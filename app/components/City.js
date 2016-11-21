@@ -1,5 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+// const Router = require('react-');
+// const Link = Router.Link;
 var utils = require('../utils/helpers');
 var getDate = utils.getDate;
 var convertTemp = utils.convertTemp;
@@ -41,7 +43,7 @@ function DayItem (props) {
   var date = getDate(props.day.dt);
   var icon = props.day.weather[0].icon;
   return (
-    <div style={styles.dayContainer}>
+    <div style={styles.dayContainer} onClick={props.onClickEvent}>
       <img style={styles.weather} src={'./app/images/weather-icons/' + icon + '.svg'} alt='Weather' />
       <h2 style={styles.subheader}>{date}</h2>
     </div>
@@ -55,7 +57,7 @@ function ForecastUI (props) {
       <h1 style={styles.header}>{props.city}</h1>
       <div style={styles.container}>
         {props.weather.list.map(function (listItem) {
-          return <DayItem key={listItem.dt} day={listItem} />
+          return <DayItem key={listItem.dt} day={listItem} onClickEvent={props.onClickEvent.bind(null, listItem)} />
         })}
       </div>
     </div>
@@ -68,7 +70,7 @@ function City(props) {
      {
        props.isLoading === true
          ? <h1 style={styles.header}> Loading </h1>
-         : <ForecastUI city={props.city} weather={props.weather} />
+       : <ForecastUI city={props.city} weather={props.weather} onClickEvent={props.onClickEvent} />
      }
    </div>
  )
@@ -77,7 +79,8 @@ function City(props) {
 City.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   weather: PropTypes.object.isRequired,
-  city: PropTypes.string.isRequired
+  city: PropTypes.string.isRequired,
+  onClickEvent: PropTypes.func.isRequired
 }
 
 module.exports = City;
